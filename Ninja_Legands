@@ -1,0 +1,293 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Ninja Legands" .. Fluent.Version,
+    SubTitle = "by FlowUp",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(540, 280),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Darker",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+--Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "rbxassetid://10734887784" }),
+    Misc = Window:AddTab({ Title = "Misc", Icon = "rbxassetid://10734976528" }),
+    Credit = Window:AddTab({ Title = "Credit", Icon = "rbxassetid://10709810463" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+-- // GAME DATA \\ --
+local ranks = {}
+for i,v in pairs(game:GetService("ReplicatedStorage").Ranks.Ground:GetChildren()) do
+   table.insert(ranks,tostring(v))
+end
+local teleports = {}
+for i,v in pairs(game:GetService("Workspace").areaTeleportParts:GetChildren()) do
+   table.insert(teleports,tostring(v))
+end
+
+local Options = Fluent.Options
+
+do
+
+-- // TABS MAIN \\ --
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Swing", Default = false })
+
+    Toggle:OnChanged(function(aa)
+        if aa then
+        _G.loop = true
+        while _G.loop == true do wait()
+                     task.wait()
+             local ohString1 = "swingKatana"
+game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(ohString1)
+          end
+    else
+        _G.loop = false
+    end
+    end)
+
+    Options.MyToggle:SetValue(false)
+    
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Sell", Default = false })
+
+    Toggle:OnChanged(function(bb)
+        if bb then
+        _G.loop = true
+        while _G.loop == true do wait()
+                     task.wait()
+             game:GetService("Workspace").sellAreaCircles.sellAreaCircle16.circleInner.CFrame = CFrame.new(50,50,50)
+       game:GetService("Workspace").sellAreaCircles.sellAreaCircle16.circleInner.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+          end
+    else
+        _G.loop = false
+    end
+    end)
+
+    Options.MyToggle:SetValue(false)
+    
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Buy Sword", Default = false })
+
+    Toggle:OnChanged(function(cc)
+        if cc then
+        _G.loop = true
+        while _G.loop == true do wait()
+                     task.wait()
+             local ohString1 = "buyAllSwords"
+               local ohString2 = "Blazing Vortex Island"
+               game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(ohString1, ohString2)
+          end
+    else
+        _G.loop = false
+    end
+    end)
+
+    Options.MyToggle:SetValue(false)
+    
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Buy Belts", Default = false })
+
+    Toggle:OnChanged(function(dd)
+        if dd then
+        _G.loop = true
+        while _G.loop == true do wait()
+                     task.wait()
+             local ohString1 = "buyAllBelts"
+local ohString2 = "Blazing Vortex Island"
+game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(ohString1, ohString2)
+          end
+    else
+        _G.loop = false
+    end
+    end)
+
+    Options.MyToggle:SetValue(false)
+    
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Buy Skill", Default = false })
+
+    Toggle:OnChanged(function(ff)
+        if ff then
+        _G.loop = true
+        while _G.loop == true do wait()
+                     task.wait()
+             local ohString1 = "buyAllSkills"
+   local ohString2 = "Blazing Vortex Island"
+   game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(ohString1, ohString2)
+          end
+    else
+        _G.loop = false
+    end
+    end)
+
+    Options.MyToggle:SetValue(false)
+    
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Buy Rank", Default = false })
+
+    Toggle:OnChanged(function(ee)
+        if ee then
+        _G.loop = true
+        while _G.loop == true do wait()
+                     task.wait()
+             for i = 1,#ranks do
+                   local ohString1 = "buyRank"
+                   local ohString2 = ranks[i]
+                   game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(ohString1, ohString2)
+                   end
+          end
+    else
+        _G.loop = false
+    end
+    end)
+
+    Options.MyToggle:SetValue(false)
+
+-- // TABS MISC \\ --
+local Toggle = Tabs.Misc:AddToggle("MyToggle", {Title = "Auto Hoops", Default = false })
+
+    Toggle:OnChanged(function(gg)
+        if gg then
+        _G.loop = true
+        while _G.loop == true do wait()
+                     task.wait()
+             for i,v in pairs(game:GetService("Workspace").Hoops:GetChildren()) do
+                   v.touchPart.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+                   wait(0.02)
+                   end
+          end
+    else
+        _G.loop = false
+    end
+    end)
+
+    Options.MyToggle:SetValue(false)
+
+Tabs.Misc:AddButton({
+        Title = "Auto Chest",
+        Description = "Open every island safe",
+        Callback = function()
+        for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+                       if string.match(v.Name,"Chest") and v:IsA("Model") then
+                           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.circleOuter.Position)
+                           game.Players.LocalPlayer.Character.Humanoid.Jump = true
+                           wait(0.5)
+                       end
+                   end
+        end
+    })
+    
+Tabs.Misc:AddButton({
+        Title = "Discover all Islands",
+        Description = "Unlock all islands",
+        Callback = function()
+        for i = 1,#teleports do
+               game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Workspace").areaTeleportParts[teleports[i]].Position)
+               wait()
+                   end
+        end
+    })
+
+Tabs.Misc:AddButton({
+        Title = "Anti Afk",
+        Description = "Allows you to be afk and not crash",
+        Callback = function()
+        Fluent:Notify({
+    Title = "FlowUp Hub",
+    Content = "The anti afk was active",
+    Duration = 8
+})
+loadstring(game:HttpGet("https://pastebin.com/raw/FPfaukXN"))()
+        end
+    })
+    
+Tabs.Misc:AddButton({
+        Title = "Low Graphic",
+        Description = "Minimizes graphics and boosts fps",
+        Callback = function()
+        Fluent:Notify({
+    Title = "FlowUp Hub",
+    Content = "The Low Graphic was active",
+    Duration = 8
+})
+local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
+local g = game
+local w = g.Workspace
+local l = g.Lighting
+local t = w.Terrain
+t.WaterWaveSize = 0
+t.WaterWaveSpeed = 0
+t.WaterReflectance = 0
+t.WaterTransparency = 0
+l.GlobalShadows = false
+l.FogEnd = 9e9
+l.Brightness = 0
+settings().Rendering.QualityLevel = "Level01"
+for i, v in pairs(g:GetDescendants()) do
+    if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+    elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+        v.Transparency = 1
+    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+        v.Lifetime = NumberRange.new(0)
+    elseif v:IsA("Explosion") then
+        v.BlastPressure = 1
+        v.BlastRadius = 1
+    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+        v.Enabled = false
+    elseif v:IsA("MeshPart") then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+        v.TextureID = 10385902758728957
+    end
+end
+for i, e in pairs(l:GetChildren()) do
+    if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+        e.Enabled = false
+    end
+end
+        end
+    })
+    
+Tabs.Misc:AddButton({
+        Title = "RTX Graphic",
+        Description = "change your graphics to RTX",
+        Callback = function()
+        Fluent:Notify({
+    Title = "FlowUp Hub",
+    Content = "The RTX was active",
+    Duration = 8
+})
+loadstring(game:HttpGet("https://pastebin.com/raw/vmjZ4UY8"))() 
+        end
+    })
+
+Tabs.Credit:AddParagraph({
+        Title = "Owner",
+        Content = "!"
+    })
+    
+Tabs.Credit:AddParagraph({
+        Title = "Scripters",
+        Content = "!, Zadix"
+    })
+    
+Tabs.Credit:AddParagraph({
+        Title = "Testers",
+        Content = "Nothing"
+    })
+
+end
+    
+-- TABS SETTINGS
+InterfaceManager:SetLibrary(Fluent)
+
+InterfaceManager:SetFolder("FluentScriptHub")
+
+InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+
+Fluent:Notify({
+    Title = "FlowUp Hub",
+    Content = "The gui has been loaded.",
+    Duration = 8
+})
