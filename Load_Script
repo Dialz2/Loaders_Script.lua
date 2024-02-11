@@ -27,7 +27,7 @@ Title.BackgroundTransparency = 1
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 25
 Title.Font = Enum.Font.SourceSansBold
-Title.Text = "Ninja Legands (FlowUp)" -- Change to your script name
+Title.Text = "FlowUp Hub Loaded..." -- Change to your script name
 Title.Parent = frame
 
 -- Loading bar frame
