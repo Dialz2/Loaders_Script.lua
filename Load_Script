@@ -68,7 +68,7 @@ function animateLoadingBar()
   wait(0.5)
   gui:Destroy()
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Dialz2/Ninja_Legands.lua/main/Ninja_Legands"))() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dialz2/Loaders_Script.lua/main/Ninja_Legands"))() 
 end
 
 -- Function to update the loading progress
